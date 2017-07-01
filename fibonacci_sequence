@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+long long fib(int i,vector <long long> &A){
+    if(i>A.size()-1){
+        long long temp= fib(i-1,A)+ fib(i-2,A);
+       // cout<<A.size()<<" "<<i<<endl;
+        A.push_back(temp);
+        return fib(i-1,A)+ fib(i-2,A);
+    }
+    else {
+        return A[i];
+        
+    }
+    
+}
+
+
+
+
+int main() {
+    std::vector<long long> fibbo;
+    fibbo.push_back(0);
+    fibbo.push_back(1);
+    // memoization
+    int n=5;
+    cout<<fib(n,fibbo)<<endl;
+    for(int i=0;i<fibbo.size();i++){
+        cout<<fibbo[i]<<endl;
+    }
+    
+    
+	// your code goes here
+	return 0;
+}
