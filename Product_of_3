@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Utility functions to get minimum of two integers
+int min (int x, int y) {return x < y? x : y; }
+ 
+// Utility functions to get maximum of two integers
+int max (int x, int y) {return x > y? x : y; }
+ 
+/* Returns the product of max product subarray. 
+   Assumes that the given array always has a subarray
+   with product more than 1 */
+int maxSubarrayProduct(int arr[], int n)
+{
+    // max positive product ending at the current position
+    int max_ending_here = arr[0];
+ 
+    // min negative product ending at the current position
+    int min_ending_here = arr[0];
+ 
+    // Initialize overall max product
+    int max_so_far = arr[0];
+ 
+    //Traverse through the array.
+    for (int i = 1; i < n; i++)
+    {
+        int temp1 = max_ending_here;
+        int temp2 = min_ending_here;
+        max_ending_here = max(temp1*arr[i], max(temp2*arr[i], arr[i]));
+        min_ending_here = min(temp1*arr[i], min(temp2*arr[i], arr[i]));
+        
+        // update max_so_far, if needed
+        if (max_so_far <  max_ending_here)
+          max_so_far  =  max_ending_here;
+    }
+ 
+    return max_so_far;
+}
+
+// Driver Program to test above function
+int main()
+{
+    int arr[] = {1, -2, -3, 0, 7, -8, -2};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    printf("Maximum Sub array product is %d", 
+            maxSubarrayProduct(arr, n));
+    return 0;
+}
