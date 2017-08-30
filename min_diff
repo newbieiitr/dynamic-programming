@@ -1,0 +1,114 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+#include <math.h>
+using namespace std;
+
+void Add(int numb,vector <int> &temp,unordered_map <int,int> &hash,int &sum,unordered_map <int,int> &index){
+    if(hash.find(numb)==hash.end()) hash[numb]=1;
+    else hash[numb]=hash[numb]+1;
+    
+    temp.push_back(numb);
+    index[numb]=temp.size()-1;
+    sum+=numb;
+}
+void remo(unordered_map <int,int> &hash,vector <int> &temp,int numb,int &sum,unordered_map <int,int> &index){
+    if(numb==0) return ;
+     if(hash[numb]!=1) hash[numb]=hash[numb]=hash[numb]-1;
+    else {
+        hash.erase(numb);
+    }
+    
+    temp.erase(temp.begin()+index[numb]);
+    sum-=numb;
+}
+int check(unordered_map <int,int> &hash,int start,int end){
+    
+    for(int i=start;i<end;i++){
+        if (hash.find(i)!=hash.end()) return i;
+    }
+    return 0;
+}
+void prin(vector <int> &A){
+    
+    for(int i=0;i<A.size();i++) cout<<A[i]<<" ";
+    cout<<endl;
+}
+    
+
+
+void cal(vector <int> A){
+    
+    sort(A.begin(),A.end(),std::greater <int>());
+    
+    vector <int> first;
+    vector <int> second;
+    unordered_map <int,int> F;
+    unordered_map <int,int> S;
+    unordered_map <int,int> indexf;
+unordered_map <int,int> indexs;
+    first.push_back(A[0]);
+    second.push_back(A[1]);
+    F[A[0]]=1;
+    S[A[1]]=1;
+    int sum1=A[0];
+    int sum2=A[1];
+    for(int i=2;i<A.size();i++){
+        if(sum1==sum2){
+            if(first.)
+        }
+        
+        if(sum1<sum2){
+            int diff=sum2-sum1;
+            Add(A[i],first,F,sum1,indexf);
+            
+            if(sum1>=sum2){
+                int numb=check(F,ceil(A[i]/2),diff);
+                // return 0 if no number possible
+                remo(F,first,numb,sum1,indexf);
+            }
+            
+        }
+        
+        else {
+             int diff=sum1-sum2;
+            Add(A[i],second,S,sum2,indexs);
+             
+            if(sum2>sum1){
+                int numb=check(S,ceil(A[i]/2),diff);
+                // return 0 if no number possible
+                remo(S,second,numb,sum2,indexs);
+            }
+            
+        }
+            
+        }
+        // print;
+        cout<<abs(sum1-sum2)<<endl;
+        prin(first);
+        prin(second);
+        
+    }
+
+
+int main() {
+    
+    int t;
+    cin>>t;
+    while(t--){
+        int size;
+        cin>>size;
+        int te;
+        vector <int> temp;
+        
+        for(int i=0;i<size;i++){
+           cin>>te;
+           temp.push_back(te);
+        }
+        cal(temp);
+        
+    }
+	//code
+	return 0;
+}
